@@ -4,6 +4,8 @@ import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.RoundEnvironment;
 import javax.annotation.processing.SupportedAnnotationTypes;
+import javax.lang.model.element.Element;
+import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.TypeElement;
 import javax.tools.Diagnostic;
 import java.util.Set;
@@ -18,7 +20,13 @@ public class TestProc extends AbstractProcessor {
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
-        System.out.println("Testing");
+        for (Element element : roundEnv.getElementsAnnotatedWith(Saved.class)) {
+            if (element.getKind() == ElementKind.CLASS) {
+                TypeElement typeElement = (TypeElement) element;
+                String className = typeElement.getSimpleName().toString();
+                System.out.println(className);
+            }
+        }
         return true;
     }
 }
