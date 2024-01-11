@@ -6,7 +6,6 @@ import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.lang.model.element.TypeElement;
 import java.util.Set;
 
-@Main.Test
 @Saved
 public class Main {
     public static void main(String[] args) {
